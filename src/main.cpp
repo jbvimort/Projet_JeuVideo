@@ -18,6 +18,7 @@ namespace ig = irr::gui;
 
 int main()
 {
+    std::srand(time(NULL));
     // Le gestionnaire d'événements
     EventReceiver receiver;
 
