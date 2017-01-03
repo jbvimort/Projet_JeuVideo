@@ -18,6 +18,7 @@ namespace ig = irr::gui;
 
 int main()
 {
+    std::srand(time(NULL));
     // Le gestionnaire d'événements
     EventReceiver receiver;
 
@@ -538,8 +539,7 @@ int main()
             {
                 for(unsigned int i=0;i<vector_zombies.size();i++)
                 {
-
-                    if((vector_zombies[i].is_ghost() && receiver.display_arme2) || (!vector_zombies[i].is_ghost() && receiver.display_arme1))
+                    if(((vector_zombies[i].is_ghost() && receiver.display_arme2) || (!vector_zombies[i].is_ghost() && receiver.display_arme1)) && vector_zombies[i].isAlive())
                     {
                         if(vector_zombies[i].get_nodeZombie()==selected_scene_node)
                         {
