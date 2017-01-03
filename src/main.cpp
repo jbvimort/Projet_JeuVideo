@@ -280,6 +280,9 @@ int main()
     iv::ITexture *fire_texture;
     ig::IGUIWindow *window;
     callback* CallBack=new callback(smgr);
+    ig::IGUIImage *hit;
+    iv::ITexture *hit_texture;
+    bool hit_display = false;
 
     while(device->run())
     {
@@ -402,6 +405,20 @@ int main()
                     score -= 10;
                     if(score < 0)
                         score = 0;
+
+                    if(!hit_display)
+                    {
+                        hit_texture=driver->getTexture("data/Weapons/hit.png");
+                        hit = gui->addImage(ic::rect<s32>(1,1, 639,479));
+                        hit->setScaleImage(true);
+                        hit->setImage(hit_texture);
+                        hit_display = true;
+                    }
+                }
+                else if(hit_display)
+                {
+                    hit->remove();
+                    hit_display = false;
                 }
 
                 // Variable pour savoir si tous les zombies ont été tués
