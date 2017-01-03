@@ -309,15 +309,18 @@ int main()
         }
 
         // Gestion de nos ennemis zombie
-        for (unsigned int i = 0 ; i<vector_zombies.size(); ++i)
+        bool zombies_all_dead = true; // message permettant de savoir si tous les zombie ont été tués
+        for (unsigned int i = 0 ; i <  vector_zombies.size(); ++i)
         {
-            // Cent pas du zombie
             zombie Zombie = vector_zombies[i];
+
             if (Zombie.isAlive())
             {
                 is::IAnimatedMeshSceneNode* nodeZombie = Zombie.get_nodeZombie();
                 ic::vector3df position_zombie = nodeZombie->getPosition();
                 ic::vector3df rotation_zombie = nodeZombie->getRotation();
+
+                // Cent pas du zombie
                 if(Zombie.get_pos_begin().X != Zombie.get_pos_end().X)
                 {
                     if( (int)rotation_zombie.Y % 360 == 0)
@@ -338,8 +341,26 @@ int main()
                 }
                 nodeZombie->setRotation(rotation_zombie);
                 nodeZombie->setPosition(position_zombie);
+
+                // Collision avec le personnage
+                float diffX = camera->getPosition().X - position_zombie.X;
+                float diffY = camera->getPosition().Y - position_zombie.Y;
+                float diffZ = camera->getPosition().Z - position_zombie.Z;
+                float dist_perso_zombie = sqrt(diffX*diffX + diffY*diffY + diffZ*diffZ);
+                if (dist_perso_zombie <= 60)
+                {
+                    score -= 10;
+                    if(score < 0)
+                        score = 0;
+                }
+
+                // Variable pour savoir si tous les zombies ont été tués
+                zombies_all_dead = false;
             }
         }
+        // Si tous les fantomes et zombies sont mort, c'est la fin du jeu
+        if (zombies_all_dead && index_objet_fantome.size() == 0)
+            creation_message_finjeu(gui);
 
 
         // Gestion de nos armes
@@ -469,13 +490,17 @@ int main()
                 for(unsigned int i=0;i<vector_zombies.size();i++)
                 {
 
-                    if(vector_zombies[i].get_nodeZombie()==selected_scene_node)
+                    if((vector_zombies[i].is_ghost() && receiver.display_arme2) || (!vector_zombies[i].is_ghost() && receiver.display_arme1))
                     {
-                        is::IAnimatedMeshSceneNode* node = vector_zombies[i].get_nodeZombie();
-                        node->setMD2Animation(is::EMAT_DEATH_FALLBACK);
-                        node->setLoopMode(false);
-                        node->setAnimationEndCallback(CallBack);
-                        vector_zombies[i].zombieDied();
+                        if(vector_zombies[i].get_nodeZombie()==selected_scene_node)
+                        {
+                            is::IAnimatedMeshSceneNode* node = vector_zombies[i].get_nodeZombie();
+                            node->setMD2Animation(is::EMAT_DEATH_FALLBACK);
+                            node->setLoopMode(false);
+                            node->setAnimationEndCallback(CallBack);
+                            vector_zombies[i].zombieDied();
+                            score += 10;
+                        }
                     }
                 }
             }
