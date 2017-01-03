@@ -469,7 +469,7 @@ int main()
                 for(unsigned int i=0;i<vector_zombies.size();i++)
                 {
 
-                    if(vector_zombies[i].get_nodeZombie()==selected_scene_node)
+                    if(vector_zombies[i].get_nodeZombie()==selected_scene_node && vector_zombies[i].isAlive())
                     {
                         is::IAnimatedMeshSceneNode* node = vector_zombies[i].get_nodeZombie();
                         node->setMD2Animation(is::EMAT_DEATH_FALLBACK);
