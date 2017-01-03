@@ -69,28 +69,70 @@ int main()
     camera->setPosition(ic::vector3df(50, 50, -60));
     camera->setTarget(ic::vector3df(-70, 30, -60));
 
-    //Création du décor
+    //Création du décor et des fantomes associés
     std::vector<objet> decoration;
+    std::vector<ic::vector3df> ghostStartPosition;
+    std::vector<ic::vector3df> ghostEndPosition;
     decoration.push_back(objet(ic::vector3df(256.0 ,-16.0 ,45.0),ic::vector3df(-90.0 ,-135.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor1, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-200.0,40.0,-60.0));
+    ghostEndPosition.push_back(ic::vector3df(200.0,40.0,-60.0));
     decoration.push_back(objet(ic::vector3df(55.0 ,179.0 ,-1050.0),ic::vector3df(-90.0 ,0.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor1, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-108.0,200.0,-975.0));
+    ghostEndPosition.push_back(ic::vector3df(170.0,200.0,-975.0));
     decoration.push_back(objet(ic::vector3df(680.0 ,243.0 ,1025.0),ic::vector3df(-90.0 ,225.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor1, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(415.0,270.0,835.0));
+    ghostEndPosition.push_back(ic::vector3df(703.0,270.0,835.0));
     decoration.push_back(objet(ic::vector3df(-580.0 ,115.0 ,-555.0),ic::vector3df(-90.0 ,45.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor1, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-572.0,110.0,-442.0));
+    ghostEndPosition.push_back(ic::vector3df(239.0,110.0,-442.0));
     decoration.push_back(objet(ic::vector3df(-150.0 ,-16.0 ,-160.0),ic::vector3df(-90.0 ,45.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor2, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-200.0,10.0,-60.0));
+    ghostEndPosition.push_back(ic::vector3df(200.0,10.0,-60.0));
     decoration.push_back(objet(ic::vector3df(250.0 ,115.0 ,-340.0),ic::vector3df(-90.0 ,-135.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor2, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-572.0,130.0,-442.0));
+    ghostEndPosition.push_back(ic::vector3df(239.0,130.0,-442.0));
     decoration.push_back(objet(ic::vector3df(-570.0 ,275.0 ,-1010.0),ic::vector3df(-90.0 ,45.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor2, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-440.0,300.0,-975.0));
+    ghostEndPosition.push_back(ic::vector3df(655.0,300.0,-975.0));
     decoration.push_back(objet(ic::vector3df(63.0 ,339.0 ,505.0),ic::vector3df(-90.0 ,180.0 ,0.0),ic::vector3df(2.0 ,2.0 ,2.0), objet::armor2, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-300.0,360.0,331.0));
+    ghostEndPosition.push_back(ic::vector3df(370.0,360.0,331.0));
     decoration.push_back(objet(ic::vector3df(-120.0 ,90.0 ,450.0),ic::vector3df(180.0 ,0.0 ,0.0),ic::vector3df(20.0 ,20.0 ,20.0), objet::box, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-478.0,130.0,350.0));
+    ghostEndPosition.push_back(ic::vector3df(700.0,130.0,350.0));
     decoration.push_back(objet(ic::vector3df(210.0 ,280.0 ,-60.0),ic::vector3df(180.0 ,0.0 ,0.0),ic::vector3df(20.0 ,20.0 ,20.0), objet::box, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-400.0,350.0,-70.0));
+    ghostEndPosition.push_back(ic::vector3df(580.0,350.0,-70.0));
     decoration.push_back(objet(ic::vector3df(442.0 ,-45.0 ,-65.0),ic::vector3df(180.0 ,0.0 ,0.0),ic::vector3df(20.0 ,20.0 ,20.0), objet::box, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-200.0,40.0,-60.0));
+    ghostEndPosition.push_back(ic::vector3df(200.0,40.0,-60.0));
     decoration.push_back(objet(ic::vector3df(-470.0 ,310.0 ,344.0),ic::vector3df(180.0 ,0.0 ,0.0),ic::vector3df(20.0 ,20.0 ,20.0), objet::box, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-300.0,360.0,331.0));
+    ghostEndPosition.push_back(ic::vector3df(370.0,360.0,331.0));
     decoration.push_back(objet(ic::vector3df(-325.0 ,-60.0 ,-45.0),ic::vector3df(0.0 ,-90.0 ,0.0),ic::vector3df(13.0 ,13.0 ,13.0), objet::chest, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-200.0,40.0,-60.0));
+    ghostEndPosition.push_back(ic::vector3df(200.0,40.0,-60.0));
     decoration.push_back(objet(ic::vector3df(-460.0 ,280.0 ,-240.0),ic::vector3df(0.0 ,180.0 ,0.0),ic::vector3df(13.0 ,13.0 ,13.0), objet::chest, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-450.0,350.0,-160.0));
+    ghostEndPosition.push_back(ic::vector3df(-450.0,350.0,-460.0));
     decoration.push_back(objet(ic::vector3df(-450.0 ,60.0 ,450.0),ic::vector3df(0.0 ,0.0 ,0.0),ic::vector3df(13.0 ,13.0 ,13.0), objet::chest, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-478.0,130.0,350.0));
+    ghostEndPosition.push_back(ic::vector3df(700.0,130.0,350.0));
     decoration.push_back(objet(ic::vector3df(570.0 ,60.0 ,-540.0),ic::vector3df(0.0 ,180.0 ,0.0),ic::vector3df(13.0 ,13.0 ,13.0), objet::chest, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(570.0,130.0,-440.0));
+    ghostEndPosition.push_back(ic::vector3df(570.0,130.0,400.0));
     decoration.push_back(objet(ic::vector3df(-160.0 ,-60.0 ,90.0),ic::vector3df(0.0 ,0.0 ,0.0),ic::vector3df(8.0 ,8.0 ,8.0), objet::wood, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-200.0,40.0,-60.0));
+    ghostEndPosition.push_back(ic::vector3df(200.0,40.0,-60.0));
     decoration.push_back(objet(ic::vector3df(560.0 ,70.0 ,450.0),ic::vector3df(0.0 ,0.0 ,0.0),ic::vector3df(8.0 ,8.0 ,8.0), objet::wood, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-478.0,130.0,350.0));
+    ghostEndPosition.push_back(ic::vector3df(700.0,130.0,350.0));
     decoration.push_back(objet(ic::vector3df(683.0 ,230.0 ,-1000.0),ic::vector3df(0.0 ,-45.0 ,0.0),ic::vector3df(8.0 ,8.0 ,8.0), objet::wood, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-440.0,300.0,-975.0));
+    ghostEndPosition.push_back(ic::vector3df(655.0,300.0,-975.0));
     decoration.push_back(objet(ic::vector3df(-95.0 ,260.0 ,-40.0),ic::vector3df(0.0 ,90.0 ,0.0),ic::vector3df(8.0 ,8.0 ,8.0), objet::wood, smgr, meta_selector));
+    ghostStartPosition.push_back(ic::vector3df(-400.0,350.0,-70.0));
+    ghostEndPosition.push_back(ic::vector3df(580.0,350.0,-70.0));
 
     // Variable pour gerer notre message lorsque le joueur rentre en collision avec un objet
     bool ouverture_message[decoration.size()];
@@ -129,9 +171,9 @@ int main()
 
     // Chargement de nos ennemis zombie
     std::vector<zombie> vector_zombies;
-    int Nb_zombies = 2;
-    ic::vector3df pos_begin_zombie[Nb_zombies] = {ic::vector3df(-200.0,-30.0,-60.0), ic::vector3df(49.0,-30.0,-180.0)};
-    ic::vector3df pos_end_zombie[Nb_zombies] = {ic::vector3df(0.0,-30.0,-60.0), ic::vector3df(49.0,-30.0,70.0)};
+    int Nb_zombies = 4;
+    ic::vector3df pos_begin_zombie[Nb_zombies] = {ic::vector3df(60.0,110.0,430.0), ic::vector3df(575.0,336.0,-580.0),ic::vector3df(-460.0,110.0,-375.0), ic::vector3df(49.0,-30.0,-180.0)};
+    ic::vector3df pos_end_zombie[Nb_zombies] = {ic::vector3df(60.0,110.0,715.0), ic::vector3df(575.0,336.0,80.0),ic::vector3df(-460.0,110.0,288.0), ic::vector3df(49.0,-30.0,70.0)};
     for( int i = 0; i < Nb_zombies; i++)
     {
         zombie Zombie(pos_begin_zombie[i], pos_end_zombie[i], false);
@@ -281,7 +323,7 @@ int main()
                         {
                             ouverture_message[i] = true;
                             window = creation_message_fantome(gui);
-                            zombie Zombie(ic::vector3df(-200.0,40.0,-60.0),ic::vector3df(0.0,80.0,-60.0), true);
+                            zombie Zombie(ghostStartPosition[i],ghostEndPosition[i], true);
                             Zombie.creation_nodeZombie(smgr, driver);
                             vector_zombies.push_back(Zombie);
                             index_objet_fantome.erase(index_objet_fantome.begin() + k);
@@ -324,7 +366,7 @@ int main()
                         position_zombie.X += 2;
                     else if ((int)rotation_zombie.Y % 360 == 180)
                         position_zombie.X -= 2;
-                    if(position_zombie.X == Zombie.get_pos_end().X || position_zombie.X == Zombie.get_pos_begin().X)
+                    if(position_zombie.X >= Zombie.get_pos_end().X || position_zombie.X <= Zombie.get_pos_begin().X)
                         rotation_zombie.Y += 180;
                 }
                 if(Zombie.get_pos_begin().Z != Zombie.get_pos_end().Z)
@@ -333,8 +375,15 @@ int main()
                         position_zombie.Z -= 2;
                     else if ((int)rotation_zombie.Y % 360 == 270)
                         position_zombie.Z += 2;
-                    if(position_zombie.Z == Zombie.get_pos_end().Z || position_zombie.Z == Zombie.get_pos_begin().Z)
+                    if(position_zombie.Z >= Zombie.get_pos_end().Z || position_zombie.Z <= Zombie.get_pos_begin().Z)
                         rotation_zombie.Y += 180;
+                }
+                if(Zombie.is_ghost())
+                {
+                    if(position_zombie.Y != Zombie.get_pos_end().Y)
+                        position_zombie.Y += 2;
+                    else if(position_zombie.Y != Zombie.get_pos_begin().Y)
+                        position_zombie.Y -= 2;
                 }
                 nodeZombie->setRotation(rotation_zombie);
                 nodeZombie->setPosition(position_zombie);
@@ -393,7 +442,7 @@ int main()
                 float diffY = camera->getPosition().Y - positionPiece.Y;
                 float diffZ = camera->getPosition().Z - positionPiece.Z;
                 float dist_perso_coins= sqrt(diffX*diffX + diffY*diffY + diffZ*diffZ);
-                if (dist_perso_coins <= 10) // Collisions dans ce cas
+                if (dist_perso_coins <= 15) // Collisions dans ce cas
                 {
                     score += 1;
                     // Suppression de la pièce de la scéne
