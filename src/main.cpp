@@ -61,7 +61,7 @@ int main()
     // Création de la caméra
     scene::ICameraSceneNode* camera =
             smgr->addCameraSceneNodeFPS(nullptr,
-                                        10,         // Vitesse de rotation
+                                        100,         // Vitesse de rotation
                                         .3,          // Vitesse de déplacement
                                         -1,          // Identifiant
                                         keyMap, 5,  // Table de changement de touches
@@ -173,8 +173,8 @@ int main()
     // Chargement de nos ennemis zombie
     std::vector<zombie> vector_zombies;
     int Nb_zombies = 4;
-    ic::vector3df pos_begin_zombie[Nb_zombies] = {ic::vector3df(60.0,110.0,430.0), ic::vector3df(575.0,336.0,-580.0),ic::vector3df(-460.0,110.0,-375.0), ic::vector3df(49.0,-30.0,-180.0)};
-    ic::vector3df pos_end_zombie[Nb_zombies] = {ic::vector3df(60.0,110.0,715.0), ic::vector3df(575.0,336.0,80.0),ic::vector3df(-460.0,110.0,288.0), ic::vector3df(49.0,-30.0,70.0)};
+    ic::vector3df pos_begin_zombie[] = {ic::vector3df(60.0,110.0,430.0), ic::vector3df(575.0,336.0,-580.0),ic::vector3df(-460.0,110.0,-375.0), ic::vector3df(49.0,-30.0,-180.0)};
+    ic::vector3df pos_end_zombie[] = {ic::vector3df(60.0,110.0,715.0), ic::vector3df(575.0,336.0,80.0),ic::vector3df(-460.0,110.0,288.0), ic::vector3df(49.0,-30.0,70.0)};
     for( int i = 0; i < Nb_zombies; i++)
     {
         zombie Zombie(pos_begin_zombie[i], pos_end_zombie[i], false);
@@ -227,7 +227,7 @@ int main()
     // Création of N set of coins:
     // Initialisation des set de coins : position de départ, position de fin, et nombre de pièces
     int Nb_coinsSet = 13;
-    ic::vector3df pos_begin[Nb_coinsSet] = {ic::vector3df(-200.0,10.0,-60.0),
+    ic::vector3df pos_begin[] = {ic::vector3df(-200.0,10.0,-60.0),
                                             ic::vector3df(60.0,10.0,23.0),
                                             ic::vector3df(210.0,10.0,-134.0),
                                             ic::vector3df(282.0,10.0,0.0),
@@ -241,7 +241,7 @@ int main()
                                             ic::vector3df(-450.0,142.0,-217.0),
                                             ic::vector3df(570.0,142.0,174.0)
                                            };
-    ic::vector3df pos_end[Nb_coinsSet] = {ic::vector3df(-280.0,10.0,-60.0),
+    ic::vector3df pos_end[] = {ic::vector3df(-280.0,10.0,-60.0),
                                           ic::vector3df(-120.0,10.0,23.0),
                                           ic::vector3df(-65.0,10.0,-134.0),
                                           ic::vector3df(282.0,10.0,-153.0),
@@ -255,7 +255,7 @@ int main()
                                           ic::vector3df(-450.0,142.0,310.0),
                                           ic::vector3df(570.0,142.0,-450.0),
                                          };
-    int nb_coins[Nb_coinsSet] = {3, 4, 3, 6, 5, 4, 7, 6, 3, 3, 4, 3, 5};
+    int nb_coins[] = {3, 4, 3, 6, 5, 4, 7, 6, 3, 3, 4, 3, 5};
     std::vector<int> set_selection;
     for( int i = 0; i < Nb_coinsSet; i++)
     {
