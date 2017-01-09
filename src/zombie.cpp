@@ -30,12 +30,12 @@ void zombie::set_nodeZombie(is::IAnimatedMeshSceneNode* nodeZombie_param)
     nodeZombie = nodeZombie_param;
 }
 
-
+/** Creation of a vector containing Nb_zombie zombie nodes **/
 void zombie::creation_nodeZombie(is::ISceneManager *smgr, iv::IVideoDriver  *driver)
 {
 
     is::IAnimatedMesh *zombie = smgr->getMesh("data/ennemis_zombie/tris.md2");
-      // Attachement de notre personnage dans la scène
+    // Attachement de notre personnage dans la scène
     nodeZombie = smgr->addAnimatedMeshSceneNode(zombie);
     nodeZombie->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     nodeZombie->setMD2Animation(irr::scene::EMAT_STAND);
@@ -50,11 +50,13 @@ void zombie::creation_nodeZombie(is::ISceneManager *smgr, iv::IVideoDriver  *dri
     nodeZombie->setMD2Animation(irr::scene::EMAT_RUN);
 }
 
+/** Fonction indiquant si le zombie est vivant ou non **/
 bool const& zombie::isAlive() const
 {
     return alive;
 }
 
+/** Fonction pour faire mourrir le zombie **/
 void zombie::zombieDied()
 {
     alive = false;

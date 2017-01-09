@@ -39,17 +39,17 @@ public:
 
 
 private:
-    /** position **/
+    /** position of decoration **/
     ic::vector3df objectPostion;
-    /** rotation **/
+    /** rotation of decoration **/
     ic::vector3df objectRotation;
-    /** scale **/
+    /** scale of decoration **/
     ic::vector3df objectScale;
     /** type of decoration **/
     type objectType;
-    /** mesh **/
+    /** mesh of decoration **/
     is::IAnimatedMesh *meshObject;
-    /** object **/
+    /** object of decoration **/
     is::IAnimatedMeshSceneNode *nodeObject;
 
 };

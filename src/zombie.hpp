@@ -25,11 +25,13 @@ public:
     is::IAnimatedMeshSceneNode* get_nodeZombie();
     void set_nodeZombie(is::IAnimatedMeshSceneNode* nodeZombie_param);
 
-    /** Creation of a vector containing Nb_zombie zombie nodes**/
+    /** Creation of a vector containing Nb_zombie zombie nodes **/
     void creation_nodeZombie(is::ISceneManager *smgr, video::IVideoDriver *driver);
 
+    /** Fonction indiquant si le zombie est vivant ou non **/
     bool const& isAlive() const;
 
+    /** Fonction pour faire mourrir le zombie **/
     void zombieDied();
 
 private:

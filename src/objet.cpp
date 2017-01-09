@@ -19,7 +19,7 @@ objet::objet(ic::vector3df position, ic::vector3df rotation, ic::vector3df scale
     nodeObject->setRotation(objectRotation);
     nodeObject->setScale(objectScale);
     nodeObject->setMaterialFlag(iv::EMF_LIGHTING, false);
-    // Création du triangle selector
+    // Création du triangle selector afin de gérer les collisions avec le joueur
     scene::ITriangleSelector *object_selector;
     object_selector = smgr->createTriangleSelector(nodeObject->getMesh(), nodeObject);
     nodeObject->setTriangleSelector(object_selector);

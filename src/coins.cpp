@@ -36,7 +36,7 @@ void coins::set_vectorNodeCoins(std::vector<is::IAnimatedMeshSceneNode*> vectorN
     vectorNodeCoins = vectorNodeCoins_param;
 }
 
-
+/** Creation of a vector containing Nb_coins coins nodes**/
 std::vector<scene::IAnimatedMeshSceneNode *> coins::creation_vectorNodeCoins(is::ISceneManager *smgr)
 {
     for( int i = 0; i < Nb_coins; i++)

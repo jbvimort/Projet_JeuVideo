@@ -18,7 +18,9 @@ namespace ig = irr::gui;
 
 int main()
 {
+    // Initialisation du rand
     std::srand(time(NULL));
+
     // Le gestionnaire d'événements
     EventReceiver receiver;
 
@@ -143,7 +145,7 @@ int main()
         ouverture_message[i] = false;
         collision_objet[i] = false;
     }
-    // Tableau pour définir les 3 index des objets où se cachent nos 3 fantômes
+    // Définition d'un tableau contenant les 3 index des objets où se cachent nos 3 fantômes
     std::vector<unsigned int>  index_objet_fantome;
     bool index_different = false;
     while(!index_different)
@@ -161,7 +163,7 @@ int main()
 
     }
 
-    // Et l'animateur/collisionneur
+    // Création de l'animateur/collisionneur
     scene::ISceneNodeAnimator *anim;
     anim = smgr->createCollisionResponseAnimator(meta_selector,
                                                  camera,  // Le noeud que l'on veut gérer
@@ -191,7 +193,7 @@ int main()
     target->setImage(target_texture);
 
     // Chargement de l'arme initiale
-    ///Weapon 1
+        // Pistolet
     is::IAnimatedMesh *weapon = smgr->getMesh("data/Weapons/weapon1/weapon1.obj");
     is::IAnimatedMeshSceneNode *node_weapon = smgr->addAnimatedMeshSceneNode(weapon,camera);
     node_weapon->setMD2Animation(is::EMAT_CROUCH_STAND );
@@ -213,19 +215,18 @@ int main()
     digits[8] = driver->getTexture("data/score/8.png");
     digits[9] = driver->getTexture("data/score/9.png");
 
-    // Création des places pour les chiffres
+    // Création des places pour le score
     ig::IGUIImage *score_10000 = gui->addImage(ic::rect<s32>(10,10,  50,50)); score_10000->setScaleImage(true);
     ig::IGUIImage *score_1000  = gui->addImage(ic::rect<s32>(50,10,  90,50)); score_1000->setScaleImage(true);
     ig::IGUIImage *score_100   = gui->addImage(ic::rect<s32>(90,10,  130,50)); score_100->setScaleImage(true);
     ig::IGUIImage *score_10    = gui->addImage(ic::rect<s32>(130,10, 170,50)); score_10->setScaleImage(true);
     ig::IGUIImage *score_1     = gui->addImage(ic::rect<s32>(170,10, 210,50)); score_1->setScaleImage(true);
 
-
-    // Vecteur des nodes de nos pièces
+    // Création of N set of coins:
+        // Vecteur des nodes de nos pièces
     std::vector<coins> vectorCoins;
 
-    // Création of N set of coins:
-    // Initialisation des set de coins : position de départ, position de fin, et nombre de pièces
+        // Initialisation des set de coins : position de départ, position de fin, et nombre de pièces
     int Nb_coinsSet = 13;
     ic::vector3df pos_begin[] = {ic::vector3df(-200.0,10.0,-60.0),
                                             ic::vector3df(60.0,10.0,23.0),
@@ -262,7 +263,7 @@ int main()
         set_selection.push_back(i);
     }
     std::vector<int> selected_set;
-    // Affichage des set de pièces sélectionnées
+        // Affichage des set de pièces sélectionnées
     int Nb_coinsSet_display = 6;
     for( int i = 0; i < Nb_coinsSet_display; i++)
     {
@@ -288,7 +289,7 @@ int main()
     {
         driver->beginScene(true, true, iv::SColor(100,150,200,255));
 
-        // Gestion de nos objets
+        /** ********************** Gestion de nos objets ************************ **/
         for (unsigned int i = 0; i  <decoration.size(); ++i)
         {
             ic::vector3df positionObjet = decoration[i].get_position();
@@ -353,8 +354,10 @@ int main()
                 }
             }
         }
+        /** ********************************************************************* **/
 
-        // Gestion de nos ennemis zombie
+
+        /** ******************* Gestion de nos ennemis zombie ******************* **/
         bool zombies_all_dead = true; // message permettant de savoir si tous les zombie ont été tués
         for (unsigned int i = 0 ; i <  vector_zombies.size(); ++i)
         {
@@ -428,15 +431,15 @@ int main()
         // Si tous les fantomes et zombies sont mort, c'est la fin du jeu
         if (zombies_all_dead && index_objet_fantome.size() == 0)
             creation_message_finjeu(gui);
+        /** ********************************************************************* **/
 
-
-        // Gestion de nos armes
+        /** ************************ Gestion de nos armes *********************** **/
         if(receiver.display_arme1)
         {
             // Suppression de l'arme 2
             smgr->addToDeletionQueue(node_weapon);
 
-            //Affichage de l'arme 1
+            // Affichage de l'arme 1
             weapon = smgr->getMesh("data/Weapons/weapon1/weapon1.obj");
             node_weapon = smgr->addAnimatedMeshSceneNode(weapon,camera);
             node_weapon->setMD2Animation(is::EMAT_CROUCH_STAND );
@@ -451,7 +454,7 @@ int main()
             // Suppression de l'arme 1
             smgr->addToDeletionQueue(node_weapon);
 
-            //Affichage de l'arme 2
+            // Affichage de l'arme 2
             weapon = smgr->getMesh("data/Weapons/weapon2/weapon2.obj");
             node_weapon = smgr->addAnimatedMeshSceneNode(weapon,camera);
             node_weapon->setMD2Animation(is::EMAT_CROUCH_STAND );
@@ -460,10 +463,10 @@ int main()
             node_weapon->setScale(ic::vector3df(0.05,0.05,0.05));
             node_weapon->setMaterialFlag(iv::EMF_LIGHTING, false);
         }
+        /** ********************************************************************* **/
 
-
-        // Gestion de nos pièces
-        for (unsigned int ii = 0 ; ii<vectorCoins.size(); ++ii)
+        /** *********************** Gestion de nos pièces *********************** **/
+                for (unsigned int ii = 0 ; ii<vectorCoins.size(); ++ii)
         {
 
             std::vector<is::IAnimatedMeshSceneNode*> vectorNodeCoins = vectorCoins[ii].get_vectorNodeCoins();
@@ -513,12 +516,12 @@ int main()
                 }
             }
         }
+        /** ********************************************************************* **/
 
-        // Gestion de la flame du canon
+        /** ******************* Gestion de la flame du canon ******************** **/
         if(receiver.display_fire && !fire_display)
         {
-            //Chargement de la flame au canon
-
+            // Chargement de la flame au canon
             if(receiver.display_arme1)
             {
                 fire_texture=driver->getTexture("data/Weapons/fire.png");
@@ -538,8 +541,9 @@ int main()
             fire->remove();
             fire_display = false;
         }
+        /** ********************************************************************* **/
 
-        //Detection de tir
+        /** ************************** Detection de tir ************************* **/
         if(receiver.display_fire)
         {
             is::ISceneCollisionManager *collision_manager = smgr->getSceneCollisionManager();
@@ -560,6 +564,7 @@ int main()
                     {
                         if(vector_zombies[i].get_nodeZombie()==selected_scene_node)
                         {
+                            //Déclenchement de l'annimation de mort de l'ennemis
                             is::IAnimatedMeshSceneNode* node = vector_zombies[i].get_nodeZombie();
                             node->setMD2Animation(is::EMAT_DEATH_FALLBACK);
                             node->setLoopMode(false);
@@ -572,13 +577,15 @@ int main()
             }
 
         }
+        /** ********************************************************************* **/
 
-        // Mise à jour du score :
+        /** *********************** Mise à jour du score ************************ **/
         score_10000->setImage(digits[(score / 10000) % 10]);
         score_1000->setImage(digits[(score / 1000) % 10]);
         score_100->setImage(digits[(score / 100) % 10]);
         score_10->setImage(digits[(score / 10) % 10]);
         score_1->setImage(digits[(score / 1) % 10]);
+        /** ********************************************************************* **/
 
 
         // Dessin de la scène :
